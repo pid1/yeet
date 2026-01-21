@@ -88,6 +88,24 @@ npx wrangler dev
 
 This starts a local server at `http://localhost:8787` with a local R2 simulator.
 
+## Limits
+
+Cloudflare Workers enforce request body size limits:
+
+| Plan | Max Upload Size |
+|------|----------------|
+| Free / Bundled | 100 MB |
+| Unbound | 500 MB |
+
+To enable uploads >100MB (requires Unbound pricing), add to `wrangler.toml`:
+
+```toml
+[limits]
+allow_request_body_over_100mb = true
+```
+
+For files larger than 500MB, consider using [R2 presigned URLs](https://developers.cloudflare.com/r2/api/s3/presigned-urls/) for direct uploads.
+
 ## Configuration
 
 Edit `wrangler.toml` to customize:

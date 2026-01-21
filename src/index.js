@@ -80,9 +80,8 @@ async function handleUpload(request, env, url) {
 
   const extension = filename ? getExtension(filename) : getExtensionFromContentType(contentType);
 
-  // Store file in R2
-  const body = await request.arrayBuffer();
-  await env.BUCKET.put(key, body, {
+  // Store file in R2 (stream directly to avoid memory issues with large files)
+  await env.BUCKET.put(key, request.body, {
     httpMetadata: {
       contentType: contentType,
     },
