@@ -1,6 +1,6 @@
 # yeet
 
-A simple file upload service running on Cloudflare Workers + R2.
+A simple file upload service running on Cloudflare Workers + R2. Files auto-expire after 7 days.
 
 ## Setup
 
@@ -14,7 +14,12 @@ A simple file upload service running on Cloudflare Workers + R2.
    npx wrangler r2 bucket create yeet-files
    ```
 
-3. Deploy the worker:
+3. Set up auto-expiration (7 days):
+   ```bash
+   npx wrangler r2 bucket lifecycle add yeet-files --expire-days 7
+   ```
+
+4. Deploy the worker:
    ```bash
    npx wrangler deploy
    ```
@@ -37,22 +42,22 @@ curl -T data.json -H "Content-Type: application/json" https://yeet.<your-subdoma
 echo "Hello, World!" | curl -X POST -d @- https://yeet.<your-subdomain>.workers.dev/
 ```
 
-The response will be the URL where your file can be accessed:
+The response will be a memorable URL where your file can be accessed:
 ```
-https://yeet.<your-subdomain>.workers.dev/abc123-def456.txt
+https://yeet.<your-subdomain>.workers.dev/curious-racehorse
 ```
 
 ### Download a file
 
 ```bash
 # Download to stdout
-curl https://yeet.<your-subdomain>.workers.dev/abc123-def456.txt
+curl https://yeet.<your-subdomain>.workers.dev/curious-racehorse
 
 # Save to file
-curl -o downloaded.txt https://yeet.<your-subdomain>.workers.dev/abc123-def456.txt
+curl -o downloaded.txt https://yeet.<your-subdomain>.workers.dev/curious-racehorse
 
 # Save with original filename
-curl -OJ https://yeet.<your-subdomain>.workers.dev/abc123-def456.txt
+curl -OJ https://yeet.<your-subdomain>.workers.dev/curious-racehorse
 ```
 
 ### Examples
@@ -60,19 +65,19 @@ curl -OJ https://yeet.<your-subdomain>.workers.dev/abc123-def456.txt
 Upload an image and get the URL:
 ```bash
 $ curl -T screenshot.png https://yeet.example.workers.dev/screenshot.png
-https://yeet.example.workers.dev/550e8400-e29b-41d4-a716-446655440000.png
+https://yeet.example.workers.dev/golden-phoenix
 ```
 
 Upload text from a command:
 ```bash
 $ ls -la | curl -X POST -d @- -H "Content-Type: text/plain" https://yeet.example.workers.dev/
-https://yeet.example.workers.dev/6ba7b810-9dad-11d1-80b4-00c04fd430c8.txt
+https://yeet.example.workers.dev/swift-kraken
 ```
 
 Share a log file:
 ```bash
 $ curl -T /var/log/app.log https://yeet.example.workers.dev/app.log
-https://yeet.example.workers.dev/6ba7b814-9dad-11d1-80b4-00c04fd430c8.log
+https://yeet.example.workers.dev/misty-glacier
 ```
 
 ## Local Development
