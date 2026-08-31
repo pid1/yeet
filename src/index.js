@@ -242,7 +242,7 @@ async function handleUpload(request, env, url) {
 
   // Return the URL
   const fileUrl = `${url.origin}/${key}`;
-  return new Response(fileUrl + "\n", {
+  return new Response(`${fileUrl}\n`, {
     status: 201,
     headers: { "Content-Type": "text/plain" },
   });
