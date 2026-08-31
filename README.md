@@ -47,7 +47,7 @@ echo "Hello, World!" | curl -X POST -d @- https://yeet.<your-subdomain>.workers.
 
 The response will be a memorable URL where your file can be accessed:
 
-```
+```text
 https://yeet.<your-subdomain>.workers.dev/curious-racehorse
 ```
 
