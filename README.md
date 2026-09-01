@@ -5,16 +5,19 @@ A simple file upload service running on Cloudflare Workers + R2. Files auto-expi
 ## Setup
 
 1. Install dependencies:
+
    ```bash
    npm install
    ```
 
 2. Create the R2 bucket:
+
    ```bash
    npx wrangler r2 bucket create yeet-files
    ```
 
 3. Set up auto-expiration (7 days):
+
    ```bash
    npx wrangler r2 bucket lifecycle add yeet-files --expire-days 7
    ```
@@ -43,7 +46,8 @@ echo "Hello, World!" | curl -X POST -d @- https://yeet.<your-subdomain>.workers.
 ```
 
 The response will be a memorable URL where your file can be accessed:
-```
+
+```text
 https://yeet.<your-subdomain>.workers.dev/curious-racehorse
 ```
 
@@ -63,18 +67,21 @@ curl -OJ https://yeet.<your-subdomain>.workers.dev/curious-racehorse
 ### Examples
 
 Upload an image and get the URL:
+
 ```bash
 $ curl -T screenshot.png https://yeet.example.workers.dev/screenshot.png
 https://yeet.example.workers.dev/golden-phoenix
 ```
 
 Upload text from a command:
+
 ```bash
 $ ls -la | curl -X POST -d @- -H "Content-Type: text/plain" https://yeet.example.workers.dev/
 https://yeet.example.workers.dev/swift-kraken
 ```
 
 Share a log file:
+
 ```bash
 $ curl -T /var/log/app.log https://yeet.example.workers.dev/app.log
 https://yeet.example.workers.dev/misty-glacier
@@ -92,10 +99,10 @@ This starts a local server at `http://localhost:8787` with a local R2 simulator.
 
 Cloudflare Workers enforce request body size limits:
 
-| Plan | Max Upload Size |
-|------|----------------|
-| Free / Bundled | 100 MB |
-| Unbound | 500 MB |
+| Plan           | Max Upload Size |
+| -------------- | --------------- |
+| Free / Bundled | 100 MB          |
+| Unbound        | 500 MB          |
 
 To enable uploads >100MB (requires Unbound pricing), add to `wrangler.toml`:
 
@@ -109,5 +116,6 @@ For files larger than 500MB, consider using [R2 presigned URLs](https://develope
 ## Configuration
 
 Edit `wrangler.toml` to customize:
+
 - `name` - Worker name
 - `bucket_name` - R2 bucket name
