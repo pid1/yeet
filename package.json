@@ -13,6 +13,10 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "wrangler": "^4.151.2"
-  }
+    "wrangler": "^4.151.0"
+  },
+  "engines": {
+    "npm": ">=11.10.0"
+  },
+  "packageManager": "npm@11.21.0"
 }
