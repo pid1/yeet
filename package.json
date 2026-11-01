@@ -13,7 +13,7 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "wrangler": "^4.151.2"
+    "wrangler": "^4.152.0"
   },
   "overrides": {
     "undici": "7.30.1"
