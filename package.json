@@ -14,5 +14,8 @@
   "type": "commonjs",
   "devDependencies": {
     "wrangler": "^4.156.0"
+  },
+  "overrides": {
+    "workerd": "1.20261101.1"
   }
 }
